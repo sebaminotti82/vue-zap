@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="font2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<!-- container root dove il nostro vue avrà i super poteri -->
+
+    <div id="root">
+
+<!-- container della nostra applicazione -->
+
+        <div id="containerApp">
+
+<!-- parte sinistra della nostra applicazione dedicata all header alle notifiche alla ricerca ed agli utenti -->
+
+            <div id="left">
+                 <!-- parte di header -->
+                    <header>
+                        <div class="containerImg">
+                            <img src="img/avatar_io.jpg" alt="foto profilo utente">
+                        </div>
+                        <div class="containerName">
+                            <h5>Seba Minotti</h5>
+                            <span>{{ultimoAccesso}}</span>
+                        </div>
+                        <div class="icons">
+                            <i class="fa-solid fa-circle-notch"></i>
+                            <i class="fa-solid fa-message"></i>
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                    </header>
+                <!-- fine header -->
+                <!-- parte di notifiche -->
+                      <div id="notifica">
+                          <div class="containerImg campana">
+                               <i class="fa-solid fa-bell-slash"></i>
+                          </div>
+                          <div id="testoNotifiche">
+                               <h5>Attiva e Ricevi notifiche</h5>
+                               <a href="#">Attiva notifica desktop</a>
+                          </div>
+                      </div>
+                <!-- fine notifiche -->
+
+                <!-- ricerca chat -->
+                     <div id="ricercaChat">
+                         <input type="text" name="" v-model="cercaUtn" @keyup="searchUsr" placeholder="Cerca Utenti o chat" id="">
+                     </div>
+                <!-- fine ricerca chat -->
+
+                <!-- utenti  -->
+                     <div class="utn">
+                          <div @click="selectUtn(index)" :class="counter==index?'active':'null'" v-if="contatto.visible==true" V-FOR="(contatto, index) in contacts" class="listaUtenti">
+                   
+                          <div class="containerImg">
+                                    <img :src="'img/avatar'+contatto.avatar+'.jpg'" alt="">
+                          </div>
+                          <div class="containerName">
+                              <h5>{{contatto.name}}</h5>
+                              <span> ultimo Accesso: {{contatto.lastAccess}}</span>
+                          </div>
+                          
+                      </div>
+                      
+                     </div>
+                     
+                <!-- fine utenti -->
+
+            </div>
+
+            <!-- fine parte left -->
+
+            <!-- parte destra/right -->
+            <div class="right">
+                <header>
+                    <div class="containerImg">
+                        <img :src="'img/avatar'+contacts[counter].avatar+'.jpg'" alt="foto profilo utente">
+                    </div>
+                    <div class="containerName">
+                        <h5>{{contacts[counter].name}}</h5>
+                        <span>Accesso: {{contacts[counter].lastAccess}}</span>
+                    </div>
+                    <div class="icons">
+                        <i class="fa-solid fa-circle-notch"></i>
+                        <i class="fa-solid fa-paperclip"></i>
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                </header>
+
+                <main>
+                     <div v-for="messaggio in contacts[counter].messages"  :class="messaggio.status=='sent'?'inviato':'ricevuto'"  class="boxMsg">
+                           <p>
+                               {{messaggio.text}}
+                               <span>{{messaggio.date}}</span>
+                           </p>
+                     </div>
+                </main>
+                  
+                <footer>
+                    <div class="boxFooter">
+                        <i class="fa-solid fa-face-grin"></i>
+                    </div>
+                    <div class="boxInput">
+                        <input type="text" v-model="newMessage" @keyup.enter="sendMex" placeholder="SCRIVI UN NUOVO MESSAGGIO" name="" id="">
+                    </div>
+                    <div class="boxFooter boxRight">
+                        <i class="fa-solid fa-microphone"></i>
+                    </div>
+                </footer>
+               
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <script src="main.js"></script>
+</body>
+</html>
